@@ -1,0 +1,415 @@
+version: "3.1"
+
+nlu:
+
+
+# ==============================================================================
+# LOOKUP TABLES - TUTTI I NOMI DAL DATABASE
+# ==============================================================================
+# Queste lookup tables contengono TUTTI i 7,602 giocatori e 4,300 tornei
+# presenti nel database tennisbot.db. Rasa li usa per entity extraction.
+# ==============================================================================
+
+
+- lookup: player
+  examples: |
+    - file: lookups/players.txt
+
+
+- lookup: tournament
+  examples: |
+    - file: lookups/tournaments.txt
+
+
+- lookup: surface
+  examples: |
+    - terra battuta
+    - erba
+    - cemento
+    - moquette
+    - hard
+    - clay
+    - grass    
+
+
+- regex: year
+  examples: |
+    - (?:(?:19|20)\d{2})
+
+
+- synonym: match
+  examples: |
+    - partita
+    - incontro
+    - scontro
+    - sfida
+    - gara
+    - confronto
+
+
+- synonym: matches
+  examples: |
+    - partite
+    - incontri
+    - scontri
+    - sfide
+    - gare
+    - confronti
+
+
+- synonym: tennista
+  examples: |
+    - giocatore
+    - atleta
+    - player
+    - sportivo
+
+
+- synonym: tennisti
+  examples: |
+    - atleti
+    - players
+    - giocatori
+    - sportivi
+
+
+- synonym: torneo
+  examples: |
+    - competizione
+    - evento
+    - championship
+    - torneo atp
+    - manifestazione
+    - competizioni
+    - eventi
+    - championships
+    - tornei atp
+    - manifestazioni
+
+
+
+- synonym: vs
+  examples: |
+    - contro
+    - contro di
+    - versus
+
+    
+
+
+# ==============================================================================
+# INTENT DI SISTEMA / BASE
+# ==============================================================================
+
+
+- intent: start
+  examples: |
+    - /start
+    - start
+    - inizia
+    - comincia
+    - avvia
+    - sono pronto
+    - ciao
+    - buongiorno
+    - buonasera
+    - salve
+    - ehi
+    - ciao bot
+    - tennisbot rispondimi
+    - eccomi
+
+- intent: thanks
+  examples: |
+    - grazie
+    - thanks
+    - perfetto grazie
+    - ottimo grazie
+    - ok grazie
+    - grazie mille
+    - ti ringrazio
+    - molto gentile
+    - perfetto
+    - ottimo
+    - fantastico
+    - eccellente
+    - sei stato di grande aiuto
+    - sei stato molto utile
+
+- intent: bot_capabilities
+  examples: |
+    - chi sei?
+    - cosa sei?
+    - di cosa parli?
+    - cosa sai fare?
+    - che funzioni hai?
+    - come puoi aiutarmi?
+    - quali sono le tue funzionalità?
+    - come posso usarti?
+    - mostrami i comandi disponibili
+    - cosa puoi fare?
+    - quali argomenti conosci?
+    - parlami delle tue capacità
+    - quali sono le tue competenze?
+    - in cosa puoi essermi utile?
+    - quali argomenti tratti?
+    - quali informazioni puoi darmi?
+
+- intent: bot_challenge
+  examples: |
+    - sei un bot?
+    - sei un umano?
+    - sei un assistente?
+    - sei un'applicazione?
+    - sei un programma?
+    - sei un'intelligenza artificiale?
+    - sei un chatbot?
+    - sei un agente conversazionale?
+    - sei un assistente virtuale?
+    - c'è qualcun altro dietro di te?
+    - stai rispondendo da solo?
+    - chi ti controlla?
+    - chi ti gestisce?
+
+- intent: goodbye
+  examples: |
+    - arrivederci
+    - ci vediamo
+    - saluti
+    - ci sentiamo dopo
+    - a presto
+    - addio
+    - buona serata
+    - chiudo qui
+    - devo andare
+    - ti saluto
+    - bye
+    - /exit
+    - esci
+    - stop
+    - quit
+    - basta
+    - fine
+
+- intent: nlu_fallback
+  examples: |
+    - asdasd
+    - boh
+    - non so
+    - cosa?
+    - eh?
+    - mah
+    - ok
+    - si
+    - no
+    - non voglio parlare di tennis
+    - parliamo di calcio
+    - ma se giochiamo a calcio ?
+    - voglio parlare di basket
+    - andiamo al mare?
+    - puoi cucinare?
+    - che ore sono?
+    - dimmi una barzelletta
+    - ti piace il caffè?
+    - minecraft
+    - roblox
+    - hjbdcwiygcei
+    - 123456
+    - abcd1234
+    - non mi interessa il tennis
+
+
+# ==============================================================================
+# INTENT RELATIVI AI GIOCATORI
+# ==============================================================================
+
+
+- intent: player_info
+  examples: |
+    - chi è [Novak Djokovic](player)?
+    - dimmi chi è [Rafael Nadal](player)
+    - chi è il tennista [Matteo Berrettini](player)?
+    - chi è questo giocatore [Luca Nardi](player)?
+    - chi è il giocatore di tennis [Matteo Berrettini](player)?
+    - chi è [Jannik Sinner](player)?
+    - chi è il tennista [Carlos Alcaraz](player)?
+    - chi è questo giocatore [Lorenzo Musetti](player)?
+    - chi è il giocatore di tennis [Daniil Medvedev](player)?
+    - dimmi chi è il tennista [Rafael Nadal](player)
+    - dimmi tutto su [Grigor Dimitrov](player)
+    - informazioni biografiche su [Roger Federer](player)
+    - bio [Alexander Zverev](player)
+    - profilo di [Hubert Hurkacz](player)
+    - vorrei sapere tutto su [Taylor Fritz](player)
+    - voglio informazioni su un giocatore
+    - mi dai informazioni su un tennista?
+    - mi puoi parlare di un giocatore?
+
+- intent: player_stats
+  examples: |
+    - statistiche di [Novak Djokovic](player)
+    - le statistiche del giocatore [Jannik Sinner](player)
+    - mostrarmi le statistiche aggiornate di [Carlos Alcaraz](player)
+    - performance di [Fabio Fognini](player) su [terra](surface)
+    - fammi vedere le statistiche di [Lorenzo Sonego](player) a [Wimbledon](tournament)
+    - prestazioni di [Roger Federer](player) agli [US Open](tournament) [2017](year)
+    - riepilogo statistico di [Casper Ruud](player) su [erba](surface)
+    - come sta giocando [Rafael Nadal](player) su [hard](surface) nel [2020](year)?
+    - come ha giocato [Daniil Medvedev](player) su [cemento](surface) nel [2021](year)?
+    - dammi le statistiche di [Alexander Zverev](player) su [terra battuta](surface)
+    - risultati statistici di [Lorenzo Musetti](player) a [Cincinnati Open](tournament) [2022](year)
+    - prestazioni di [Luca Nardi](player) nel [2024](year)
+    - analisi statistica di [Matteo Berrettini](player)
+    - mostrarmi i dati statistici di [Taylor Fritz](player)
+    - voglio le statistiche del giocatore
+    - riassunto delle sue prestazioni
+    - le sue statistiche
+    - statistiche
+    - prestazioni
+    - performance
+    
+
+- intent: head_to_head
+  examples: |
+    - confronto statistiche carriera tra [Gael Monfils](player) e [Richard Gasquet](player)
+    - statistiche aggregate tra [Bautista Agut](player) e [Karen Khachanov](player)
+    - bilancio totale tra [Carreno Busta](player) e [Diego Schwartzman](player)
+    - confronto tra [Lorenzo Musetti](player) e [Jannik Sinner](player)
+    - h2h [Carlos Alcaraz](player) [Alexander Zverev](player)
+    - h2h [Auger Aliassime](player) [Denis Shapovalov](player) su [erba](surface) nel [2019](year)
+    - head to head tra [Nick Kyrgios](player) e [Frances Tiafoe](player)
+    - bilancio tra [Lorenzo Sonego](player) e [Matteo Berrettini](player)
+    - statistiche tra [Casper Ruud](player) e [Holger Rune](player) su [cemento](surface) nel [2020](year)
+    - confronto tra [Stefanos Tsitsipas](player) e [Daniil Medvedev](player) a [Monte Carlo Masters](tournament) nel [2021](year)
+    - testa a testa tra [Rafael Nadal](player) e [Novak Djokovic](player) su [terra battuta](surface)
+    - scontro diretto tra [Roger Federer](player) e [Andy Murray](player) a [Wimbledon](tournament)
+    - bilancio tra [Grigor Dimitrov](player) e [Marin Cilic](player) nel [2018](year)
+    - h2h di questi giocatori
+    - h2h
+    - testa a testa
+    - confronto diretto
+    - bilancio tra loro
+    - confronto tra i due
+    - scontro diretto tra i due
+
+
+# ==============================================================================
+# INTENT RELATIVI AI TORNEI
+# ==============================================================================
+
+
+- intent: tournament_info
+  examples: |
+    - dimmi degli [Australian Open](tournament)
+    - info su [Wimbledon](tournament)
+    - info torneo [Wimbledon](tournament)
+    - dettagli su [French Open](tournament)
+    - informazioni su [Roland Garros](tournament)
+    - cos'è [ATP Finals](tournament)
+    - raccontami del torneo [Halle Open](tournament)
+    - cosa sai di [Rotterdam](tournament)
+    - tutto su [Rome Masters](tournament)
+    - parlami di [US Open](tournament)
+    - dati sul torneo [Madrid Masters](tournament)
+    - dammi informazioni sul torneo [Indian Wells](tournament)
+    - mi interessa il torneo [Paris Masters](tournament)
+    - mostrami le informazioni del torneo [Monte Carlo Masters](tournament)
+    - parlami del torneo [Queen's Club Championships](tournament)
+    - voglio informazioni su un torneo
+    - mi puoi parlare di un torneo?
+    - mi dai informazioni su un torneo?
+    - raccontami di un torneo
+    - dimmi tutto su un torneo
+
+
+# ==============================================================================
+# INTENT RELATIVI AI MATCH
+# ==============================================================================
+
+
+- intent: match_result
+  examples: |
+    - risultato di [Novak Djokovic](player) vs [Rafael Nadal](player)
+    - punteggio di [Roger Federer](player) vs [Andy Murray](player)
+    - dettagli [Stefanos Tsitsipas](player) [Daniil Medvedev](player) [ATP Finals](tournament)
+    - ultimo match [Alexander Zverev](player) [Casper Ruud](player) nel [2023](year) su [terra battuta](surface)
+    - ultima partita [Carlos Alcaraz](player) vs [Jannik Sinner](player) su [cemento](surface)
+    - risultato incontro [Lorenzo Musetti](player) [Matteo Berrettini](player) [Wimbledon](tournament)
+    - punteggio partita [Fabio Fognini](player) vs [Lorenzo Sonego](player) nel [2022](year)
+    - dettagli scontro [Daniil Medvedev](player) [Andrey Rublev](player) su [erba](surface)
+    - risultato finale [Jannik Sinner](player) [Carlos Alcaraz](player) [US Open](tournament)
+    - score [Roger Federer](player) [Stan Wawrinka](player) su [cemento](surface)
+    - match più recente [Andy Murray](player) [Stefanos Tsitsipas](player) su [erba](surface)
+    - partita [Fabio Fognini](player) vs [Lorenzo Sonego](player) [2022](year)
+    - incontro [Juan Martin del Potro](player) [Marin Cilic](player) [2018](year)
+    - ultimo match tra [Andrey Rublev](player) e [Casper Ruud](player) nel [2021](year)
+    - mostra ultimi matches di [Stefanos Tsitsipas](player)
+    - dimmi le ultime partite di [Daniil Medvedev](player)
+    - voglio vedere gli ultimi incontri di [Rafael Nadal](player)
+    - partite recenti di [Novak Djokovic](player)
+    - mostrami gli ultimi risultati di [Carlos Alcaraz](player)
+    - ultime partite di [Roger Federer](player)
+    - ultime partite di [Wimbledon](tournament)
+    - ultime partite di [Monte Carlo Masters](tournament)
+    - ultimi risultati di [US Open](tournament)
+    - ultimi incontri di [Roland Garros](tournament)
+    - le ultime partite
+    - ultimi incontri
+    - mostrami le sue partite più recenti
+    - gli ultimi scontri
+    - ultime sfide
+    - ultimi risultati
+
+
+- intent: ongoing_tournaments
+  examples: |
+    - mostra tornei in corso
+    - tornei attuali
+    - che tornei ci sono ora
+    - tornei live
+    - tornei in corso
+    - ci sono tornei in corso adesso?
+    - quale torneo è live
+    - torneo in corso
+    - quali tornei sono in corso?
+    - tornei attuali
+    - cosa si sta giocando ora?
+    - quali tornei si stanno giocando adesso?
+    - elenca i tornei in corso
+    - fammi vedere i tornei in corso
+    - mostrami i tornei in corso
+    - quali sono i tornei in corso?
+    - quali tornei sono attualmente in corso?
+    - quali tornei si stanno svolgendo ora?
+
+
+# ==============================================================================
+# INFORM FILTERS (follow-up per anno/superficie/torneo)
+# ==============================================================================
+
+
+- intent: inform_filters
+  examples: |
+    - nel [2024](year)
+    - nel [2023](year)
+    - nel [2022](year)
+    - [2020](year)?
+    - su [erba](surface)
+    - su [erba](surface)?
+    - su [terra battuta](surface)
+    - su [cemento](surface)
+    - su [cemento](surface)?
+    - [erba](surface)
+    - [terra battuta](surface)
+    - [cemento](surface)
+    - [Wimbledon](tournament)
+    - [Roland Garros](tournament)
+    - [US Open](tournament)
+    - nel torneo di [Wimbledon](tournament)
+    - nello slam [Roland Garros](tournament) del [2023](year)
+    - agli [Australian Open](tournament) del [2024](year)
+    - su [erba](surface) nel [2022](year)
+    - su [cemento](surface) nel [2024](year)
+    - [erba](surface) [2024](year)
+    - [Rome Masters](tournament) [2022](year)
+

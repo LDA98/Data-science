@@ -1,0 +1,44 @@
+#####################
+# PYTHON IGNORE
+#####################
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.log
+*.sqlite
+*.db
+
+#####################
+# VENV IGNORE
+#####################
+venv/
+ENV/
+env/
+.venv/
+
+#####################
+# JUPYTER IGNORE
+#####################
+.ipynb_checkpoints/
+
+#####################
+# RASA IGNORE
+#####################
+.rasa/
+models/
+*.lock
+*.tracker.json
+
+#####################
+# OS & EDITOR FILES
+#####################
+.DS_Store
+Thumbs.db
+*.swp
+
+#####################
+# TEMP FILES
+#####################
+*.tmp
+*.bak

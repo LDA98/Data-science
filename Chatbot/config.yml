@@ -1,0 +1,67 @@
+# The config recipe.
+# https://rasa.com/docs/rasa/model-configuration/
+recipe: default.v1
+
+# The assistant project unique identifier
+# This default value must be replaced with a unique assistant name within your deployment
+assistant_id: 20251009-183623-quiet-dam
+
+# Configuration for Rasa NLU.
+# https://rasa.com/docs/rasa/nlu/components/
+language: it
+
+pipeline:
+  # Tokenizer per separare le parole (funziona bene per italiano)
+  - name: WhitespaceTokenizer
+  
+  # Estrae features da pattern regex (utili per nomi giocatori/tornei)
+  - name: RegexFeaturizer
+  - name: RegexEntityExtractor
+    case_sensitive: false
+    use_lookup_tables: true
+    use_regexes: true
+    use_word_boundaries: true
+  
+  # Features lessicali e sintattiche
+  - name: LexicalSyntacticFeaturizer
+  
+  # Conta occorrenze parole (word-level features)
+  - name: CountVectorsFeaturizer
+  
+  # Conta occorrenze caratteri (char-level features per gestire variazioni ortografiche)
+  - name: CountVectorsFeaturizer
+    analyzer: char_wb
+    min_ngram: 3
+    max_ngram: 5
+  
+  # Classificatore principale per intents ed entities
+  - name: DIETClassifier
+    epochs: 200
+    constrain_similarities: true
+    entity_recognition: true
+    random_seed: 42
+    learning_rate: 0.001
+    dropout: 0.2
+    batch_strategy: balanced
+    batch_size: [64, 256]
+    evaluate_every_number_of_epochs: 10
+    
+  # Classificatore per gestire intenti non riconosciuti
+  - name: FallbackClassifier
+    threshold: 0.45
+    ambiguity_threshold: 0.2
+
+# Configuration for Rasa Core.
+# https://rasa.com/docs/rasa/core/policies/
+policies:
+  # Memorizza conversazioni esatte già viste
+  - name: MemoizationPolicy
+  
+  # Gestisce le regole definite in rules.yml
+  - name: RulePolicy
+  
+  # Policy principale basata su Transformer per conversazioni complesse
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 100
+    constrain_similarities: true

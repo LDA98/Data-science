@@ -1,0 +1,34 @@
+In October 2024, the Global Forum on Digital Civilization was held in Vienna, Austria, bringing together
+policymakers, corporate leaders, researchers, activists, and journalists from more than 120 countries.
+The event was organized jointly by the United Nations Educational, Scientific and Cultural Organization (UNESCO)
+and the International Institute for Technology and Society (IITS), with financial support from the European
+Commission and the Government of Canada.
+
+Among the keynote speakers were Dr. Elena Marquez, a neuroscientist at Stanford University, and
+Professor Ahmed Al-Khalidi, a historian from the University of Cairo, who presented a collaborative project titled
+"Human Identity in the Age of Algorithmic Mediation." Their research argues that large-scale digital ecosystems
+and AI-assisted decision structures are reshaping cultural memory, political identity, and even interpersonal
+relationships.
+
+On the second day of the conference, representatives from Google DeepMind, IBM Research, and the Alan Turing Institute
+held a closed workshop focused on the regulation of autonomous decision-making systems in public administration.
+During the session, the delegation from the Federal Republic of Germany proposed a new regulatory framework called
+the Berlin Protocol, intended to replace the Digital Governance Act of 2018. The protocol emphasizes transparency,
+auditability, and cross-border regulatory harmonization. France and Sweden supported the proposal, while India and
+South Africa raised concerns regarding institutional access and implementation costs.
+
+Meanwhile, a working group led by the African Union Commission presented a report documenting the effects of algorithmic
+credit scoring in Nigeria, Ghana, and Rwanda, highlighting both increased financial inclusion and heightened risk of
+systemic discrimination. The report recommended the establishment of a continental oversight board and called for
+further collaboration with the African Development Bank and the World Bank Group.
+
+During a special evening session at the Vienna State Opera, the forum hosted a cultural performance titled
+"The Data Symphony," composed by Japanese artist Riku Yamamoto. The work combined classical orchestral arrangements
+with real-time data visualizations projected onto a 40-meter stage screen. The performance was attended by UNESCO
+Director-General Audrey Azoulay, Austrian Chancellor Lukas Schneider, and former U.S. President Barack Obama.
+
+The closing session on October 19 was marked by a heated debate regarding the geopolitical implications of the
+so-called "Digital Non-Aligned Movement," led by Brazil, Indonesia, and Mexico. Analysts from the Brookings Institution
+and the Carnegie Endowment for International Peace argued that the movement reflects a growing desire among emerging
+economies to balance technological dependence and sovereignty. The final declaration of the Vienna Summit is expected
+to be ratified in early February 2025 during the follow-up meeting in Singapore.

@@ -1,0 +1,181 @@
+version: "3.1"
+
+intents:
+  - start
+  - thanks
+  - bot_capabilities
+  - bot_challenge
+  - goodbye
+  - nlu_fallback
+  - player_info
+  - player_stats
+  - head_to_head
+  - tournament_info
+  - match_result
+  - ongoing_tournaments
+  - inform_filters
+
+
+entities:
+  - player
+  - tournament
+  - surface
+  - year
+
+slots:
+
+  # ========================
+  # SLOT PRINCIPALI
+  # ========================
+
+  player_name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: player
+      - type: from_text
+        conditions:
+          - active_loop: player_info_form
+            requested_slot: player_name
+          - active_loop: player_stats_form
+            requested_slot: player_name
+
+  tournament_name:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: tournament
+      - type: from_text
+        conditions:
+          - active_loop: tournament_info_form
+            requested_slot: tournament_name
+
+  # ========================
+  # SLOT SECONDARI
+  # ========================
+
+  player1:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: player
+      - type: from_text
+        conditions:
+          - active_loop: head_to_head_form
+            requested_slot: player1
+
+  player2:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: player
+      - type: from_text
+        conditions:
+          - active_loop: head_to_head_form
+            requested_slot: player2
+
+  surface:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: surface
+
+  year:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: year
+
+  last_context_action:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: custom
+
+# ========================
+# FORM
+# ========================
+
+forms:
+
+  head_to_head_form:
+    required_slots:
+      - player1
+      - player2
+
+  player_info_form:
+    required_slots:
+      - player_name
+
+  player_stats_form:
+    required_slots:
+      - player_name
+
+  tournament_info_form:
+    required_slots:
+      - tournament_name
+  
+
+# ========================
+# RISPOSTE STANDARD
+# ========================
+
+responses:
+
+  utter_start:
+    - text: "🎾 Benvenuto nel TennisBot ATP Singles! Ho accesso a oltre 200.000 partite, 7.600 giocatori e 4.300 tornei dal 1968 al 2025. Chiedimi info su giocatori, tornei, scontri diretti o statistiche!"
+
+  utter_thanks:
+    - text: "Prego! Sono qui per questo 🎾"
+    - text: "Di niente! Se vuoi, posso mostrarti altre statistiche o confronti."
+    - text: "Felice di aiutarti! Vuoi altre informazioni sul tennis?"
+
+  utter_goodbye:
+    - text: "👋 Alla prossima! Buona giornata e... Game, Set, Match! 🎾"
+    - text: "Ciao! Torna quando vuoi sapere qualcosa sul tennis."
+    - text: "Arrivederci e buon tennis! 🎾"
+
+  utter_bot_capabilities:
+    - text: "🎾 Posso darti info su giocatori, tornei, statistiche, scontri diretti e partite in corso. Chiedimi pure!"
+
+  utter_bot_challenge:
+    - text: "Sono TennisBot, un assistente virtuale del tennis 🎾. Posso aiutarti con dati su giocatori, tornei, confronti e risultati!"
+
+  utter_ask_player_name:
+    - text: "Di quale giocatore stai parlando?"
+
+  utter_ask_tournament_name:
+    - text: "Di quale torneo vuoi informazioni?"
+
+  utter_ask_player1:
+    - text: "Inserisci il primo giocatore per il confronto (es. Jannik Sinner)."
+
+  utter_ask_player2:
+    - text: "E ora il secondo giocatore (es. Novak Djokovic)."
+
+  utter_ask_year:
+    - text: "Per quale anno? (es. 2023)"
+
+  utter_ask_surface:
+    - text: "Su quale superficie? (terra battuta, erba, cemento...)"
+
+# ========================
+# ACTIONS CUSTOM
+# ========================
+
+actions:
+  - action_player_info
+  - action_player_stats
+  - action_apply_filters
+  - action_head_to_head
+  - action_tournament_info
+  - action_match_result
+  - action_ongoing_tournaments
+  - action_default_fallback
+  - action_reset_slots

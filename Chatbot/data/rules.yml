@@ -1,0 +1,148 @@
+version: "3.1"
+
+rules:
+
+# ==============================================================================
+# REGOLE BASE DI CONVERSAZIONE
+# ==============================================================================
+
+- rule: Start command
+  steps:
+    - intent: start
+    - action: action_reset_slots
+    - action: utter_start
+
+- rule: Say thanks
+  steps:
+    - intent: thanks
+    - action: action_reset_slots
+    - action: utter_thanks
+
+- rule: Say goodbye
+  steps:
+    - intent: goodbye
+    - action: action_reset_slots
+    - action: utter_goodbye
+
+- rule: Show bot capabilities
+  steps:
+    - intent: bot_capabilities
+    - action: utter_bot_capabilities
+
+- rule: Bot challenge
+  steps:
+    - intent: bot_challenge
+    - action: utter_bot_challenge
+
+
+# ==============================================================================
+# REGOLE PER GIOCATORI
+# ==============================================================================
+
+- rule: Activate player info form
+  condition:
+    - active_loop: null
+  steps:
+    - intent: player_info
+    - action: player_info_form
+    - active_loop: player_info_form
+
+- rule: Submit player info form
+  condition:
+    - active_loop: player_info_form
+  steps:
+    - action: player_info_form
+    - active_loop: null
+    - action: action_player_info
+
+- rule: Activate player stats form
+  condition:
+    - active_loop: null
+  steps:
+    - intent: player_stats
+    - action: player_stats_form
+    - active_loop: player_stats_form
+
+- rule: Submit player stats form
+  condition:
+    - active_loop: player_stats_form
+  steps:
+    - action: player_stats_form
+    - active_loop: null
+    - action: action_player_stats
+
+
+# ==============================================================================
+# REGOLE PER CONFRONTI (HEAD TO HEAD)
+# ==============================================================================
+
+- rule: Activate head-to-head form
+  condition:
+    - active_loop: null
+  steps:
+    - intent: head_to_head
+    - action: head_to_head_form
+    - active_loop: head_to_head_form
+
+- rule: Submit head-to-head form
+  condition:
+    - active_loop: head_to_head_form
+  steps:
+    - action: head_to_head_form
+    - active_loop: null
+    - action: action_head_to_head
+
+
+# ==============================================================================
+# REGOLE PER TORNEI
+# ==============================================================================
+
+- rule: Activate tournament info form
+  condition:
+    - active_loop: null
+  steps:
+    - intent: tournament_info
+    - action: tournament_info_form
+    - active_loop: tournament_info_form
+
+- rule: Submit tournament info form
+  condition:
+    - active_loop: tournament_info_form
+  steps:
+    - action: tournament_info_form
+    - active_loop: null
+    - action: action_tournament_info
+
+
+# ==============================================================================
+# REGOLE PER MATCH
+# ==============================================================================
+
+- rule: Match result
+  steps:
+    - intent: match_result
+    - action: action_match_result
+
+- rule: Show ongoing tournaments
+  steps:
+    - intent: ongoing_tournaments
+    - action: action_ongoing_tournaments
+
+# ==============================================================================
+# REGOLE PER FILTRI
+# ==============================================================================
+
+- rule: Apply filters
+  steps:
+    - intent: inform_filters
+    - action: action_apply_filters
+
+# ==============================================================================
+# FALLBACK
+# ==============================================================================
+
+- rule: Default fallback
+  steps:
+    - intent: nlu_fallback
+    - action: action_default_fallback
+
