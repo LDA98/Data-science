@@ -12,13 +12,13 @@ I progetti includono:
 
 ## 📂 Struttura della Repository
 
-| Cartella | Contenuto | Tecniche principali |
+| Cartella | Contenuto | Tecnologie principali |
 |---------|-----------|-------------------|
-| **Chatbot** | Bot conversazionale con Rasa | Intent recognition, NLU, dialog policies |
-| **NLP** | Sentiment analysis commenti Reddit | BERT, fine-tuning, classificazione |
-| **NLP 2** | Classificazione umano/bot + NER | Embedding, CRF, spaCy |
-| **Python** | Modelli ML per vari task Classificazione/Regressione/clusterizzazione + Analisi e previsioni temporali| Random Forest, SVM, Regression, ARIMA, ecc ... |
+| **Python** | Classificazione/Regressione/Clusterizzazione dei vini + Analisi e previsioni temporali del prezzo E.A.| scikit-learn statsmodels |
 | **SNA** | Analisi rete Spotify | NetworkX |
+| **NLP** | Sentiment analysis commenti Reddit | BERT, fine-tuning, classificazione |
+| **Chatbot** | Bot conversazionale ATP single | RASA framework |
+| **NLP 2** | Text Classification umano vs ai + NER | TF-IDF, Word2Vec, spaCy |
 
 ---
 
