@@ -16,7 +16,7 @@ I progetti includono:
 |---------|-----------|-------------------|
 | **Python** | Classificazione/Regressione/Clusterizzazione dei vini + Analisi e previsioni temporali del prezzo E.A.| scikit-learn statsmodels |
 | **SNA** | Analisi rete Spotify | NetworkX |
-| **NLP** | Sentiment analysis commenti Reddit | BERT, fine-tuning, classificazione |
+| **NLP** | Sentiment analysis commenti Reddit | Transformers PyTorch BERT |
 | **Chatbot** | Bot conversazionale ATP single | RASA framework |
 | **NLP 2** | Text Classification umano vs ai + NER | TF-IDF, Word2Vec, spaCy |
 
